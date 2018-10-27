@@ -1,0 +1,6 @@
+
+// export const INCREASE_COUNTER = 'INCREASE_COUNTER';
+// export const DECREASE_COUNTER = 'DECREASE_COUNTER';
+// export const RESET_COUNTER = 'RESET_COUNTER';
+
+export const UPDATE_COUNTER = 'UPDATE_COUNTER';
