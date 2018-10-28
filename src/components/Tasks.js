@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Layout, Menu, Icon, Rate, Drawer, Button } from 'antd';
+import { Layout, Menu, Icon, Rate, Drawer } from 'antd';
 import { BrowserRouter, Route, Link, NavLink } from 'react-router-dom';
 import Task1 from './tasks/Task1';
 import Task2 from './tasks/Task2';
@@ -40,8 +40,6 @@ class Tasks extends Component {
     render() {
         console.log("TASKS RENDER")
         const { Header, Sider, Content, Footer } = Layout;
-        const key = this.state.menuItemKey;
-        console.log("key value in render: ", key);
 
         return (
             <BrowserRouter>
@@ -60,34 +58,34 @@ class Tasks extends Component {
                             <div className="logo" />
                             <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
                                 <Menu.Item key="1" >
-                                    <Icon type="user" />
+                                    <Icon type="double-right" />
                                     <span>Updated Dropdown</span>
-                                    <NavLink to="/task1"></NavLink>
+                                    <NavLink to="/task1" />
                                 </Menu.Item>
                                 <Menu.Item key="2" >
-                                    <Icon type="customer-service" theme="outlined" />
+                                    <Icon type="line-chart" />
                                     <span>Counter</span>
-                                    <NavLink to="/task2"></NavLink>
+                                    <NavLink to="/task2" />
                                 </Menu.Item>
                                 <Menu.Item key="3" >
-                                    <Icon type="wallet" theme="outlined" />
+                                    <Icon type="clock-circle" />
                                     <span>Timer Task</span>
-                                    <NavLink to="/task3"></NavLink>
+                                    <NavLink to="/task3" />
                                 </Menu.Item>
                                 <Menu.Item key="4" >
-                                    <Icon type="wallet" theme="outlined" />
+                                    <Icon type="message" />
                                     <span>Guess Number Game</span>
-                                    <NavLink to="/task4"></NavLink>
+                                    <NavLink to="/task4" />
                                 </Menu.Item>
                                 <Menu.Item key="5" >
-                                    <Icon type="wallet" theme="outlined" />
+                                    <Icon type="dollar" />
                                     <span>Money Converter</span>
-                                    <NavLink to="/task5"></NavLink>
+                                    <NavLink to="/task5" />
                                 </Menu.Item>
                                 <Menu.Item key="6" >
-                                    <Icon type="wallet" theme="outlined" />
+                                    <Icon type="calculator" />
                                     <span>Calculator</span>
-                                    <NavLink to="/task6"></NavLink>
+                                    <NavLink to="/task6" />
                                 </Menu.Item>
                             </Menu>
                         </Sider>
@@ -107,16 +105,11 @@ class Tasks extends Component {
                                 <Route path="/task4" component={Task4} />
                                 <Route path="/task5" component={Task5} />
                                 <Route path="/task6" component={Task6} />
-                                {/* <Route path="/providers" render={(routeProps) => <Providers {...routeProps} addProvider={this.handleAddProvider} providerList={this.state.providerList} />} />
-                                <Route path="/services" render={(routeProps) => <Services {...routeProps} addService={this.handleAddService} serviceList={this.state.serviceList} />} />
-                                <Route path="/charging" render={(routeProps) => <ManualCharging {...routeProps} onCharge={this.handleCharge} />} /> */}
-
                             </Content>
                         </Layout>
                     </Layout>
                     <Footer>
                         <center>
-                            {/* <Button type="primary" onClick={this.showDrawer}>Rate</Button> */}
                             <Link to='#' onClick={this.showDrawer}>Rate</Link>
                             <Drawer
                                 title="Please Rate"

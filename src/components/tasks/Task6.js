@@ -1,4 +1,4 @@
-import React , { Component } from 'react';
+import React, { Component } from 'react';
 
 class Task6 extends Component {
 
@@ -6,9 +6,12 @@ class Task6 extends Component {
         super(props);
     }
 
-    render(){
+    render() {
         return (
-            <h1>Task 6</h1>
+            <div>
+                <h1>Task 6</h1>
+                <center>Preparing..</center>
+            </div>
         )
     }
 }

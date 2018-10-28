@@ -1,30 +1,39 @@
-// import { INCREASE_COUNTER, DECREASE_COUNTER, RESET_COUNTER } from './actions';
 import { UPDATE_COUNTER } from './actions';
-
-// export const increaseCounter = counter => (
-//     {
-//         type: INCREASE_COUNTER,
-//         payload: counter
-//     }
-// )
-
-// export const decreaseCounter = counter => (
-//     {
-//         type: DECREASE_COUNTER,
-//         payload: counter
-//     }
-// )
-
-// export const resetCounter = counter => (
-//     {
-//         type: RESET_COUNTER,
-//         payload: counter
-//     }
-// )
+import { ADD_GUESS_INFO, ADD_SELECTED_NUMBER } from './actions';
+import { UPDATE_COUNTRY_LIST } from './actions';
+import { UPDATE_COUNTRY } from './actions';
 
 export const updateCounter = counter => (
     {
         type: UPDATE_COUNTER,
         payload: counter
+    }
+)
+
+export const addSelectedNumber = selectedNumber => (
+    {
+        type: ADD_SELECTED_NUMBER,
+        payload: selectedNumber
+    }
+)
+
+export const addGuessInfo = guess => (
+    {
+        type: ADD_GUESS_INFO,
+        payload: guess
+    }
+)
+
+export const updateCountryList = countryList => (
+    {
+        type: UPDATE_COUNTRY_LIST,
+        payload: countryList
+    }
+)
+
+export const updateCountry = country => (
+    {
+        type: UPDATE_COUNTRY,
+        payload: country
     }
 )

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Icon, Avatar } from 'antd';
 import { connect } from 'react-redux';
-import { updateCounter} from './../../actions/action-creators';
+import { updateCounter } from './../../actions/action-creators';
 
 const ButtonGroup = Button.Group;
 
@@ -22,14 +22,8 @@ class Task2 extends Component {
         this.props.dispatchUpdateCounter(count);
     }
 
-
     render() {
-        console.log("Task 2");
-
         const count = this.props.count;
-        console.log("count: ", count);
-        console.log("props: ", this.props)
-
         return (
             <div>
                 <h1>Task 2</h1>
@@ -58,7 +52,7 @@ class Task2 extends Component {
 
 function mapStateToProps(state) {
     return {
-        count: state.task1Store.counter
+        count: state.task2Store.counter
     };
 }
 
