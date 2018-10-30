@@ -1,7 +1,7 @@
 import { UPDATE_COUNTER } from './actions';
 import { ADD_GUESS_INFO, ADD_SELECTED_NUMBER } from './actions';
-import { UPDATE_COUNTRY_LIST } from './actions';
-import { UPDATE_COUNTRY } from './actions';
+import { UPDATE_COUNTRY_LIST, UPDATE_COUNTRY } from './actions';
+import { GET_CURRENCY_LIST, GET_MOST_USED_CURRENCY_LIST } from './actions';
 
 export const updateCounter = counter => (
     {
@@ -35,5 +35,19 @@ export const updateCountry = country => (
     {
         type: UPDATE_COUNTRY,
         payload: country
+    }
+)
+
+export const getCurrencyList = currencyData => (
+    {
+        type: GET_CURRENCY_LIST,
+        payload: currencyData
+    }
+)
+
+export const getMostUsedCurrencyList = mostUsedCurrencyData => (
+    {
+        type: GET_MOST_USED_CURRENCY_LIST,
+        payload: mostUsedCurrencyData
     }
 )

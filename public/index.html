@@ -1,14 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="theme-color" content="#000000">
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
-    <title>React App</title>
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
+
+<head>
+  <meta charset="utf-8">
+  <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="theme-color" content="#000000">
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+  <title>React App</title>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyDJ7cW3WMMsPYmDIcCJS0u_u6tCKCzVv5A",
+      authDomain: "react-tasks-d5c48.firebaseapp.com",
+      databaseURL: "https://react-tasks-d5c48.firebaseio.com",
+      projectId: "react-tasks-d5c48",
+      storageBucket: "react-tasks-d5c48.appspot.com",
+      messagingSenderId: "894629209940"
+    };
+    firebase.initializeApp(config);
+  </script>
+</body>
+
 </html>
