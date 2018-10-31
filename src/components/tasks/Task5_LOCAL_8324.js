@@ -1,9 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { getCurrencyListService } from './../../services/service';
-import { Table, InputNumber, Select, Icon } from 'antd';
-
-const Option = Select.Option;
 
 var convert = require('xml-js');
 
@@ -13,28 +8,7 @@ class Task5 extends Component {
         super(props);
     }
 
-    componentDidMount() {
-        this.props.dispatchGetCurrencyList();
-    }
-
-    cur1InputChange = (value) => {
-        console.log("cur1 input value: ", value)
-    }
-
-    cur2InputChange = (value) => {
-        console.log("cur2 input value: ", value)
-    }
-
-    handleCur1Change = (value) => {
-        console.log("cur1 select value: ", value)
-    }
-
-    handleCur2Change = (value) => {
-        console.log("cur2 select value: ", value)
-    }
-
     render() {
-<<<<<<< HEAD
   
         // var xml =
         //     '<?xml version="1.0" encoding="utf-8"?>' +
@@ -300,84 +274,16 @@ class Task5 extends Component {
         var result1 = convert.xml2json(xml, { compact: true, spaces: 4 });
         var result2 = convert.xml2json(xml, { compact: false, spaces: 4 });
         console.log(result1, '\n', result2);
-=======
-
-        const { currencyData } = this.props.store;
-        const columns = [
-            {
-                title: 'Currency',
-                key: 'name',
-                render: (currency) => (
-                    <span>
-                        {currency.nominal}  {currency.name}
-                    </span>
-                ),
-            }, {
-                title: 'Code',
-                dataIndex: 'code',
-                key: 'code',
-            }, {
-                title: 'Rate',
-                dataIndex: 'value',
-                key: 'value',
-            },
-        ];
->>>>>>> c652d601d3dfdbebd2e1ba93cf7662808e335252
 
         return (
             <div>
                 <h1>Task 5</h1>
-<<<<<<< HEAD
                 <center>Preparing..</center>
                 <p>{result1}</p>
                 <p>{result2}</p>
-=======
-                <center>
-                    <InputNumber style={{ width: 150 }} defaultValue={0} onChange={this.cur1InputChange} />
-                    <span> &nbsp; </span>
-                    <Select
-                        defaultValue={currencyData['code']}
-                        style={{ width: 100 }}
-                        onChange={this.handleCur1Change}
-                    >
-                        {currencyData.map(currency => <Option key={currency.code}>{currency.code}</Option>)}
-                    </Select>
-
-                    <span> &nbsp; </span>
-                    <Icon type="export" theme="outlined" />
-                    <span> &nbsp; </span>
-
-                    <InputNumber style={{ width: 150 }} defaultValue={0} onChange={this.cur2InputChange} />
-                    <span> &nbsp; </span>
-                    <Select
-                        defaultValue={''}
-                        style={{ width: 100 }}
-                        onChange={this.handleCur2Change}
-                    >
-                        {currencyData.map(currency => <Option key={currency.code}>{currency.code}</Option>)}
-                    </Select>
-                </center>
-                <div style={{ marginTop: 50 }}>
-                    <h4 style={{ textAlign: 'left' }}>Daily AZN Rates by Central Bank</h4>
-                    <Table dataSource={currencyData} columns={columns} />
-                </div>
-
->>>>>>> c652d601d3dfdbebd2e1ba93cf7662808e335252
             </div>
         )
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        store: state.task5Store
-    };
-}
-
-const mapDispatchToProps = (dispatch) => ({
-    dispatchGetCurrencyList() {
-        dispatch(getCurrencyListService());
-    },
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Task5)
+export default Task5
