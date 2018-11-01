@@ -10,10 +10,10 @@ class Task5 extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            cur1Val: 0,
-            cur2Val: 0,
-            cur1Code: '',
-            cur2Code: ''
+            input1Val: 0,
+            input2Val: 0,
+            select1Val: 1,
+            select2Val: 1
         }
     }
 
@@ -22,26 +22,29 @@ class Task5 extends Component {
     }
 
     cur1InputChange = (value) => {
-        console.log("cur1 input value: ", value)
+        this.setState({ input1Val: value }, () => this.converter());
     }
 
     cur2InputChange = (value) => {
-        console.log("cur2 input value: ", value)
+        // this.setState({input2Val: value})
+        console.log("Do nothing!")
     }
 
     cur1SelectChange = (value) => {
-        console.log("cur1 select value: ", value)
-        const { currencyData } = this.props.store;
-        const  currency =currencyData['USD']
-        console.log("rate: ", currency)
+        this.setState({ select1Val: value }, () => this.converter());
     }
 
     cur2SelectChange = (value) => {
-        console.log("cur2 select value: ", value)
+        this.setState({ select2Val: value }, () => this.converter());
+    }
+
+    converter = () => {
+        const { input1Val, select1Val, select2Val } = this.state
+        const input2NewVal = select1Val * input1Val / select2Val
+        this.setState({input2Val: Math.round(input2NewVal * 10000) / 10000 })
     }
 
     render() {
-
         const { currencyData } = this.props.store;
         const columns = [
             {
@@ -65,32 +68,28 @@ class Task5 extends Component {
 
         return (
             <div>
-                <h1>Task 5 <span>(not completed..)</span></h1>
+                <h1>Task 5</h1>
                 <center>
-                    <InputNumber style={{ width: 150 }} defaultValue={0} value={this.state.cur1Val} onChange={this.cur1InputChange} />
-                    <span> &nbsp; </span>
+                    <InputNumber value={this.state.input1Val} onChange={this.cur1InputChange} style={{width: 150, marginRight: 10 }} />
                     <Select
-                        defaultValue={currencyData['code']}
-                        value={this.state.cur1Code}
+                        value={this.state.select1Val}
                         style={{ width: 100 }}
                         onChange={this.cur1SelectChange}
                     >
-                        {currencyData.map(currency => <Option key={currency.code} value={currency.value}>{currency.code}</Option>)}
+                        <Option key='AZN' value={1}>AZN</Option>
+                        {currencyData.map(currency => <Option key={currency.code} value={currency.value/currency.nominal}>{currency.code}</Option>)}
                     </Select>
 
-                    <span> &nbsp; </span>
                     <Icon type="export" style={{ padding: '0 15px', fontSize: '18px', color: '#08c' }} />
-                    <span> &nbsp; </span>
 
-                    <InputNumber style={{ width: 150 }} defaultValue={0} value={this.state.cur2Val} onChange={this.cur2InputChange} />
-                    <span> &nbsp; </span>
+                    <InputNumber value={this.state.input2Val} onChange={this.cur2InputChange} style={{ width: 150, marginRight: 10 }} disabled />
                     <Select
-                        defaultValue={''}
-                        value={this.state.cur2Code}
+                        value={this.state.select2Val}
                         style={{ width: 100 }}
                         onChange={this.cur2SelectChange}
                     >
-                        {currencyData.map(currency => <Option key={currency.code}>{currency.code}</Option>)}
+                        <Option key='AZN' value={1}>AZN</Option>
+                        {currencyData.map(currency => <Option key={currency.code} value={currency.value/currency.nominal}>{currency.code}</Option>)}
                     </Select>
                 </center>
                 <div style={{ marginTop: 50 }}>
