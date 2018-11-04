@@ -1,8 +1,12 @@
 import { updateCountryList, updateCountry, getCurrencyList } from "../actions/action-creators";
 import axios from 'axios';
+import convert from 'xml-js';
+
+// axios.defaults.headers.post['Content-Type'] = 'application/json';
+// axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 
 var dateFormat = require('dateformat');
-var convert = require('xml-js');
+// var convert = require('xml-js');
 
 //*************************************************
 var xml = "<ValCurs Date=\"30.10.2018\" Name=\"AZN məzənnələri\" Description=\"Azərbaycan Respublikası Mərkəzi Bankının 30.10.2018 tarixdən etibarən xarici valyutaların və bank metallarının Azərbaycan manatına qarşı rəsmi məzənnələri bülleteni\">\n" +
@@ -284,50 +288,50 @@ export const getCurrencyListService = () => dispatch => {
     const today = dateFormat(new Date(), "dd.mm.yyyy");
     console.log("today: ", today)
 
-    //bu eslinde servisden gelmelidir..
-    const json = convert.xml2js(xml, { compact: true, spaces: 4 });
-    const curData = json.ValCurs.ValType[1].Valute;
+    axios
+        .get('https://www.cbar.az/currencies/' + today + '.xml')
+        .then(res => {
+            console.log("res : ", res)
+            console.log("res data: ", res.data)
 
-    curData.map(cur => {
-        const currency = {
-            name: cur.Name._text,
-            nominal: cur.Nominal._text,
-            value: cur.Value._text,
-            code: cur._attributes.Code
-        };
-        currencyList = [...currencyList, currency];
-    })
+            const json = convert.xml2js(res.data, { compact: true, spaces: 4 });
+            const curData = json.ValCurs.ValType[1].Valute;
 
-    console.log("currencyList: ", currencyList)
+            curData.map(cur => {
+                const currency = {
+                    name: cur.Name._text,
+                    nominal: cur.Nominal._text,
+                    value: cur.Value._text,
+                    code: cur._attributes.Code
+                };
+                currencyList = [...currencyList, currency];
+            })
 
-    dispatch(getCurrencyList(currencyList));
+            console.log("currencyList by axios: ", currencyList)
 
-    // axios
-    //     .get('https://www.cbar.az/currencies/' + today + '.xml', {
-    //         headers: {"Access-Control-Allow-Origin": "*"},
-    //         responseType: 'text/xml', 
-    //     })
-    //     .then(res => {
-    //         // const xml = res.data;
-    //         console.log("res data xml: ", res)
-    //         // const json = convert.xml2json(xml, { compact: true, spaces: 4 });
-    //         // const json2 = convert.xml2json(xml, { compact: false, spaces: 4 });
+            return currencyList;
+        })
+        .then(currencyList => {
+            dispatch(getCurrencyList(currencyList));
+        })
+        .catch(err => {
+            console.error("getCurrencyListService error occurs -> ", err);
 
-    //         // console.log("converted json", '\n', json);
+            const json = convert.xml2js(xml, { compact: true, spaces: 4 });
+            const curData = json.ValCurs.ValType[1].Valute;
 
+            curData.map(cur => {
+                const currency = {
+                    name: cur.Name._text,
+                    nominal: cur.Nominal._text,
+                    value: cur.Value._text,
+                    code: cur._attributes.Code
+                };
+                currencyList = [...currencyList, currency];
+            })
 
-    //         // res.data.map(data => {
-    //         //     console.log(data['name']);
-    //         //     // countryList.push(data['name'])
-    //         //     countryList = [...countryList, data['name']]
-    //         // })
-    //         // return countryList;
-    //     })
-    //     // .then(countryList => {
-    //     //     // dispatch(getCurrencyList(...));
-    //     //     // dispatch(updateCountry(countryList[0]));
-    //     // })
-    //     .catch(err => {
-    //         console.error("getCurrencyListService error occurs -> ", err);
-    //     })
+            console.log("currencyList from manual xml: ", currencyList)
+
+            dispatch(getCurrencyList(currencyList));
+        })
 }
